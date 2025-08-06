@@ -1,0 +1,52 @@
+server:
+  port: 9000
+spring:
+  profiles:
+    active: dev
+    include: feign
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active:public}
+        import-check:
+          enabled: false
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true
+      web-context-unify: false
+logging:
+  level:
+    com.greenbook.order.feign: debug
+feign:
+  sentinel:
+    enabled: true
+---
+spring:
+  config:
+    import:
+      - nacos:common.properties?group=service-order
+      - nacos:database.properties?group=service-order
+    activate:
+      on-profile: dev
+---
+spring:
+  config:
+    import:
+      - nacos:common.properties?group=service-order
+      - nacos:database.properties?group=service-order
+      - nacos:local.properties?group=service-order
+    activate:
+      on-profile: test
+---
+spring:
+  config:
+    import:
+      - nacos:common.properties?group=service-order
+      - nacos:database.properties?group=service-order
+      - nacos:third-party.properties?group=service-order
+    activate:
+      on-profile: prod
