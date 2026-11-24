@@ -6,7 +6,10 @@
 | --- | --- | --- |
 | 01 | 用 Spring Boot 跑起商品查询和订单预览 | [lesson-01](../../tree/lesson-01) |
 | 02 | 保留接口，把内存数据换成 MySQL | [lesson-02](../../tree/lesson-02) |
+| 03 | 用执行计划看商品查询如何走索引 | [lesson-03](../../tree/lesson-03) |
 
-没读过这个项目可以从 [第 1 课](lessons/01-spring-boot.md) 开始。已经能运行接口可以直接进入 [第 2 课](lessons/02-jdbc.md)。
+从 [第 1 课](lessons/01-spring-boot.md) 开始跑接口，接着做 [JDBC 实验](lessons/02-jdbc.md) 和 [MySQL 索引实验](lessons/03-mysql-indexes.md)。
 
 原 Spring Cloud 完整项目在 [dev 分支](../../tree/dev)，包括原来配套 Nacos、OpenFeign、Sentinel、Gateway 和 Seata 的示例。
+
+后续课程将沿用这个商品与订单案例，分别讲缓存、消息、服务发现与远程调用、限流熔断、网关和分布式事务。当前可按标签复现的是上表三课。
