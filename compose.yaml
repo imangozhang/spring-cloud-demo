@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: greenbook
+      MYSQL_USER: greenbook
+      MYSQL_PASSWORD: ${JDBC_PASSWORD:-greenbook-demo}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    ports:
+      - "127.0.0.1:${MYSQL_PORT:-3307}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_PASSWORD\" mysql -h 127.0.0.1 -u \"$$MYSQL_USER\" \"$$MYSQL_DATABASE\" -e 'SELECT 1' >/dev/null"]
+      interval: 3s
+      timeout: 5s
+      retries: 30
+volumes:
+  mysql-data:
